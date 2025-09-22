@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JIT Alumni Management Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Supabase JS CDN -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <!-- Landing Page - Portal Selection -->
+    <div id="landing-page" class="page active">
+        <div class="centered-container">
+            <header class="login-header">
+                <div class="container">
+                    <div class="institution-branding">
+                        <div class="jit-logo">JIT</div>
+                        <div class="institution-info">
+                            <h1>JANSONS INSTITUTE OF TECHNOLOGY (AUTONOMOUS)</h1>
+                            <p>Alumni Management Portal</p>
+                            <small>Karumathampatty, Somaur, Coimbatore District - 641659</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="landing-main">
+                <div class="container">
+                    <div class="portal-selection">
+                        <h2>Welcome to JIT Alumni Portal</h2>
+                        <p>Please select your portal to continue</p>
+                        
+                        <div class="portal-options">
+                            <div class="portal-card admin-portal">
+                                <div class="portal-icon">🛡️</div>
+                                <h3>Administrator Portal</h3>
+                                <p>Access administrative functions including document management, alumni oversight, and platform analytics.</p>
+                                <button class="btn btn--primary btn--full-width" onclick="showPage('admin-login-page')">Admin Login</button>
+                            </div>
+
+                            <div class="portal-card alumni-portal">
+                                <div class="portal-icon">🎓</div>
+                                <h3>Alumni Portal</h3>
+                                <p>Welcome back! Access your documents, communicate with admin, and stay connected with JIT community.</p>
+                                <button class="btn btn--primary btn--full-width" onclick="showPage('alumni-login-page')">Alumni Login</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Admin Login Page -->
+    <div id="admin-login-page" class="page">
+        <div class="centered-container">
+            <header class="login-header">
+                <div class="container">
+                    <div class="institution-branding">
+                        <div class="jit-logo">JIT</div>
+                        <div class="institution-info">
+                            <h1>JANSONS INSTITUTE OF TECHNOLOGY (AUTONOMOUS)</h1>
+                            <p>Administrator Portal Login</p>
+                            <small>Karumathampatty, Somaur, Coimbatore District - 641659</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="login-main">
+                <div class="container">
+                    <div class="single-login-container">
+                        <button class="btn btn--outline back-btn" onclick="showPage('landing-page')">← Back to Portal Selection</button>
+                        
+                        <div class="login-section admin-section">
+                            <div class="login-section-header">
+                                <div class="section-icon">🛡️</div>
+                                <h2>Administrator Login</h2>
+                                <p class="section-description">Enter your administrator credentials to access the admin panel.</p>
+                            </div>
+                            
+                            <form id="admin-login-form" class="login-form">
+                                <div class="form-group">
+                                    <label class="form-label">Administrator Email</label>
+                                    <input type="email" class="form-control" id="admin-email" placeholder="dharanikaviya0607@gmail.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="admin-password" placeholder="Enter admin password" required>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full-width">Access Administrator Portal</button>
+                            </form>
+                            
+                            <div id="admin-login-error" class="error-message hidden"></div>
+                            
+                            <div class="demo-credentials">
+                                <p><strong>Demo Admin Credentials:</strong></p>
+                                <p>Email: dharanikaviya0607@gmail.com</p>
+                                <p>Password: dharani2006</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Alumni Login Page -->
+    <div id="alumni-login-page" class="page">
+        <div class="centered-container">
+            <header class="login-header">
+                <div class="container">
+                    <div class="institution-branding">
+                        <div class="jit-logo">JIT</div>
+                        <div class="institution-info">
+                            <h1>JANSONS INSTITUTE OF TECHNOLOGY (AUTONOMOUS)</h1>
+                            <p>Alumni Portal Login</p>
+                            <small>Karumathampatty, Somaur, Coimbatore District - 641659</small>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <main class="login-main">
+                <div class="container">
+                    <div class="single-login-container">
+                        <button class="btn btn--outline back-btn" onclick="showPage('landing-page')">← Back to Portal Selection</button>
+                        
+                        <div class="login-section alumni-section">
+                            <div class="login-section-header">
+                                <div class="section-icon">🎓</div>
+                                <h2>Alumni Login</h2>
+                                <p class="section-description">Enter your alumni credentials to access your personal portal.</p>
+                            </div>
+                            
+                            <form id="alumni-login-form" class="login-form">
+                                <div class="form-group">
+                                    <label class="form-label">Alumni Email</label>
+                                    <input type="email" class="form-control" id="alumni-email" placeholder="your.email@gmail.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="alumni-password" placeholder="Enter your password" required>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full-width">Access Alumni Portal</button>
+                            </form>
+                            
+                            <div id="alumni-login-error" class="error-message hidden"></div>
+                            
+                            <div class="demo-credentials">
+                                <p><strong>Demo Alumni Credentials:</strong></p>
+                                <p>Arundhathi T: arundhtathi0509@gmail.com / arun2004</p>
+                                <p>Someshwar H T: somesh.thiagu@gmail.com / somesh2006</p>
+                                <p>Diana G: diana.gopikrishnan@gmail.com / diana2005</p>
+                                <p>Gowri S: g2021r15@gmail.com / gowri2006</p>
+                                <p>Aravind Ram: aravindram2307@gmail.com / aravind2005</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard-page" class="page">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <div class="sidebar-logo">JIT</div>
+                    <h3>Admin Panel</h3>
+                </div>
+                <button class="btn btn--outline btn--sm" id="admin-logout">Logout</button>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="menu-item active" data-view="admin-dashboard" data-role="admin">📊 Dashboard</a></li>
+                <li><a href="#" class="menu-item" data-view="admin-documents" data-role="admin">📄 Documents</a></li>
+                <li><a href="#" class="menu-item" data-view="admin-events" data-role="admin">🎪 Events</a></li>
+                <li><a href="#" class="menu-item" data-view="admin-jobs" data-role="admin">💼 Job Board</a></li>
+                <li><a href="#" class="menu-item" data-view="admin-fundraising" data-role="admin">💰 Fundraising</a></li>
+                <li><a href="#" class="menu-item" data-view="admin-communications" data-role="admin">💬 Communication</a></li>
+                <li><a href="#" class="menu-item" data-view="admin-ai-assistant" data-role="admin">🤖 AI Assistant</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <!-- Admin Dashboard View -->
+            <div id="admin-dashboard-view" class="view active">
+                <div class="view-header">
+                    <h1>JIT Alumni Management Dashboard</h1>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <h3 id="total-alumni">5</h3>
+                        <p>Total Alumni</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="pending-documents">3</h3>
+                        <p>Pending Documents</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="active-events">3</h3>
+                        <p>Upcoming Events</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="total-donations">₹1,25,000</h3>
+                        <p>Total Fundraising</p>
+                    </div>
+                </div>
+                <div class="recent-activity">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>Recent Platform Activities</h3>
+                        </div>
+                        <div class="card__body" id="admin-activities">
+                            <div class="activity-item">📄 Diana uploaded degree certificate via Supabase - 2 hours ago</div>
+                            <div class="activity-item">💬 Arundhathi sent an encrypted message - 3 hours ago</div>
+                            <div class="activity-item">🎯 New job posting added with RSA security - 5 hours ago</div>
+                            <div class="activity-item">📅 Annual Alumni Meet registrations opened - 1 day ago</div>
+                            <div class="activity-item">🔐 Document metadata encrypted with RSA - 6 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Documents View -->
+            <div id="admin-documents-view" class="view">
+                <div class="view-header">
+                    <h1>Document Management System</h1>
+                    <div class="view-actions">
+                        <button class="btn btn--outline" id="bulk-approve-btn">Bulk Approve</button>
+                        <button class="btn btn--secondary" id="export-documents-btn">Export Data</button>
+                        <button class="btn btn--primary" id="view-supabase-btn">View Supabase Storage</button>
+                    </div>
+                </div>
+                <div class="documents-layout">
+                    <div class="documents-panel">
+                        <div class="panel-header">
+                            <h3>📋 Document List</h3>
+                            <select class="form-control" id="document-filter">
+                                <option value="all">All Documents</option>
+                                <option value="pending">Pending Approval</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div class="documents-list" id="admin-documents-list">
+                            <!-- Documents will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="document-details-panel">
+                        <div class="panel-header">
+                            <h3>📄 Document Details</h3>
+                        </div>
+                        <div id="document-details-content">
+                            <div class="empty-state">
+                                <div class="empty-icon">📄</div>
+                                <p>Select a document from the list to view details and take actions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Events View -->
+            <div id="admin-events-view" class="view">
+                <div class="view-header">
+                    <h1>🎪 Events Management</h1>
+                    <button class="btn btn--primary" id="add-event-btn">🎪 Add New Event</button>
+                </div>
+                <div class="events-grid" id="admin-events-grid">
+                    <!-- Events will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Admin Jobs View -->
+            <div id="admin-jobs-view" class="view">
+                <div class="view-header">
+                    <h1>💼 Job Board Management</h1>
+                    <button class="btn btn--primary" id="add-job-btn">💼 Post New Job</button>
+                </div>
+                <div class="jobs-grid" id="admin-jobs-grid">
+                    <!-- Jobs will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Admin Fundraising View -->
+            <div id="admin-fundraising-view" class="view">
+                <div class="view-header">
+                    <h1>Fundraising Analytics</h1>
+                </div>
+                <div class="fundraising-stats">
+                    <div class="stat-card">
+                        <h3>₹1,25,000</h3>
+                        <p>Total Donations</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>₹5,000</h3>
+                        <p>Average Donation</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>25</h3>
+                        <p>Total Donors</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>3</h3>
+                        <p>Active Campaigns</p>
+                    </div>
+                </div>
+                <div class="upi-qr-section">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>UPI Payment Details</h3>
+                        </div>
+                        <div class="card__body">
+                            <p><strong>UPI ID:</strong> dharanikaviya0607@okhdfcbank</p>
+                            <p>Scan QR code or use UPI ID for donations</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Communications View -->
+            <div id="admin-communications-view" class="view">
+                <div class="view-header">
+                    <h1>Communication System</h1>
+                </div>
+                <div class="communications-layout">
+                    <div class="chat-sidebar">
+                        <div class="chat-header">
+                            <h3>💬 Active Chats</h3>
+                            <span class="online-count">4 online</span>
+                        </div>
+                        <div class="chat-list" id="admin-chat-list">
+                            <!-- Chat list populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="chat-main">
+                        <div class="chat-header" id="current-chat-header">
+                            <h3>Select a conversation</h3>
+                        </div>
+                        <div class="chat-messages" id="admin-chat-messages">
+                            <div class="welcome-message">
+                                <p>👋 Welcome to JIT Communication!</p>
+                                <p>Select a conversation from the sidebar to start chatting with alumni.</p>
+                            </div>
+                        </div>
+                        <div class="chat-input-area" id="admin-chat-input-area">
+                            <input type="text" class="form-control" id="admin-chat-input" placeholder="Type your message..." disabled>
+                            <button class="btn btn--outline btn--sm" id="admin-emoji-btn">😊</button>
+                            <button class="btn btn--primary" id="admin-send-btn">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin AI Assistant View -->
+            <div id="admin-ai-assistant-view" class="view">
+                <div class="view-header">
+                    <h1>AI Assistant Analytics</h1>
+                </div>
+                <div class="ai-analytics">
+                    <div class="ai-stats">
+                        <div class="stat-card">
+                            <h3>147</h3>
+                            <p>Total Queries</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>96%</h3>
+                            <p>Success Rate</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>24</h3>
+                            <p>Today's Queries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Alumni Dashboard -->
+    <div id="alumni-dashboard-page" class="page">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <div class="sidebar-logo">JIT</div>
+                    <h3>Alumni Portal</h3>
+                </div>
+                <div id="alumni-welcome"></div>
+                <button class="btn btn--outline btn--sm" id="alumni-logout">Logout</button>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="menu-item active" data-view="alumni-dashboard" data-role="alumni">📊 Dashboard</a></li>
+                <li><a href="#" class="menu-item" data-view="alumni-documents" data-role="alumni">📄 Documents</a></li>
+                <li><a href="#" class="menu-item" data-view="alumni-events" data-role="alumni">🎪 Events</a></li>
+                <li><a href="#" class="menu-item" data-view="alumni-jobs" data-role="alumni">💼 Job Board</a></li>
+                <li><a href="#" class="menu-item" data-view="alumni-fundraising" data-role="alumni">💰 Fundraising</a></li>
+                <li><a href="#" class="menu-item" data-view="alumni-communications" data-role="alumni">💬 Communication</a></li>
+                <li><a href="#" class="menu-item" data-view="alumni-ai-assistant" data-role="alumni">🤖 AI Assistant</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <!-- Alumni Dashboard View -->
+            <div id="alumni-dashboard-view" class="view active">
+                <div class="view-header">
+                    <h1>My JIT Alumni Dashboard</h1>
+                </div>
+                <div class="dashboard-grid">
+                    <div class="stat-card">
+                        <h3 id="my-documents">2</h3>
+                        <p>My Documents</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="pending-approvals">1</h3>
+                        <p>Pending Approvals</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="upcoming-events">3</h3>
+                        <p>Upcoming Events</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="job-applications">0</h3>
+                        <p>Job Applications</p>
+                    </div>
+                </div>
+                <div class="recent-activity">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>My Recent Activities</h3>
+                        </div>
+                        <div class="card__body" id="alumni-activities">
+                            <div class="activity-item">📄 Document uploaded to Supabase successfully - 1 hour ago</div>
+                            <div class="activity-item">✅ Resume approved with RSA encryption - 2 days ago</div>
+                            <div class="activity-item">💬 Encrypted message from admin - 3 days ago</div>
+                            <div class="activity-item">📅 Registered for Annual Alumni Meet - 5 days ago</div>
+                            <div class="activity-item">🔐 Profile data secured with RSA - 1 week ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alumni Documents View -->
+            <div id="alumni-documents-view" class="view">
+                <div class="view-header">
+                    <h1>My Document Access</h1>
+                </div>
+                <div class="documents-layout">
+                    <div class="documents-panel">
+                        <div class="panel-header">
+                            <h3>📋 My Documents</h3>
+                            <select class="form-control" id="alumni-document-filter">
+                                <option value="all">All Documents</option>
+                                <option value="Academic Certificates">Academic Certificates</option>
+                                <option value="Identity Documents">Identity Documents</option>
+                                <option value="Resumes & CVs">Resumes & CVs</option>
+                                <option value="Other Documents">Other Documents</option>
+                            </select>
+                        </div>
+                        <div class="documents-list" id="alumni-documents-list">
+                            <div class="empty-state" id="no-documents-message">
+                                <div class="empty-icon">📄</div>
+                                <p>No documents have been uploaded yet.</p>
+                                <p class="empty-subtitle">Upload your first document using the form on the right.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="upload-panel">
+                        <div class="panel-header">
+                            <h3>📤 Upload Document to Supabase</h3>
+                        </div>
+                        <div class="upload-form-container">
+                            <form id="document-upload-form">
+                                <div class="form-group">
+                                    <label class="form-label">Document Title</label>
+                                    <input type="text" class="form-control" id="document-title" placeholder="e.g., Degree Certificate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Category</label>
+                                    <select class="form-control" id="document-category" required>
+                                        <option value="">Select category</option>
+                                        <option value="Academic Certificates">Academic Certificates</option>
+                                        <option value="Identity Documents">Identity Documents</option>
+                                        <option value="Resumes & CVs">Resumes & CVs</option>
+                                        <option value="Other Documents">Other Documents</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">PDF or JPG File</label>
+                                    <input type="file" class="form-control" id="document-file" accept=".pdf,.jpg,.jpeg" required>
+                                    <small class="form-help">Supported: PDF, JPG files only. Max size: 10MB. Files uploaded to Supabase with RSA encryption.</small>
+                                </div>
+                                <button type="submit" class="btn btn--primary btn--full-width">Upload to Supabase</button>
+                            </form>
+                            <div id="upload-progress" class="upload-progress hidden">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-fill"></div>
+                                </div>
+                                <p id="progress-text">Uploading to Supabase...</p>
+                            </div>
+                            <div id="retry-info" class="card hidden" style="margin-top: 16px;">
+                                <div class="card__body">
+                                    <p><strong>Upload with Auto-Retry:</strong></p>
+                                    <p>• Maximum 3 retry attempts</p>
+                                    <p>• RSA encrypted metadata</p>
+                                    <p>• Supabase storage integration</p>
+                                    <p>• Real-time progress tracking</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alumni Events View -->
+            <div id="alumni-events-view" class="view">
+                <div class="view-header">
+                    <h1>🎪 Upcoming Events</h1>
+                </div>
+                <div class="events-grid" id="alumni-events-grid">
+                    <!-- Events will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Alumni Jobs View -->
+            <div id="alumni-jobs-view" class="view">
+                <div class="view-header">
+                    <h1>💼 Job Opportunities</h1>
+                </div>
+                <div class="jobs-grid" id="alumni-jobs-grid">
+                    <!-- Jobs will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Alumni Fundraising View -->
+            <div id="alumni-fundraising-view" class="view">
+                <div class="view-header">
+                    <h1>Support JIT</h1>
+                </div>
+                <div class="fundraising-info">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>💰 Donate to JIT</h3>
+                        </div>
+                        <div class="card__body">
+                            <p>Support your alma mater by contributing to various initiatives and helping current students achieve their dreams.</p>
+                            <p><strong>UPI ID:</strong> dharanikaviya0607@okhdfcbank</p>
+                            <div class="fundraising-stats">
+                                <div class="stat-item">
+                                    <span class="stat-value">₹1,25,000</span>
+                                    <span class="stat-label">Total Raised</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-value">25</span>
+                                    <span class="stat-label">Contributors</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alumni Communications View -->
+            <div id="alumni-communications-view" class="view">
+                <div class="view-header">
+                    <h1>Communication</h1>
+                </div>
+                <div class="communications-layout single-chat">
+                    <div class="chat-main">
+                        <div class="chat-header">
+                            <div class="chat-user">
+                                <div class="avatar admin-avatar">A</div>
+                                <div class="user-info">
+                                    <h3>Admin</h3>
+                                    <span class="status online">Online</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-messages" id="alumni-chat-messages">
+                            <!-- Messages populated by JavaScript -->
+                        </div>
+                        <div class="chat-input-area">
+                            <input type="text" class="form-control" id="alumni-chat-input" placeholder="Type your message...">
+                            <button class="btn btn--outline btn--sm" id="alumni-emoji-btn">😊</button>
+                            <button class="btn btn--primary" id="alumni-send-btn">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alumni AI Assistant View -->
+            <div id="alumni-ai-assistant-view" class="view">
+                <div class="view-header">
+                    <h1>AI Assistant</h1>
+                </div>
+                <div class="ai-chat-container">
+                    <div class="card">
+                        <div class="card__header">
+                            <h3>🤖 JIT AI Assistant - Ask me anything!</h3>
+                        </div>
+                        <div class="card__body">
+                            <div id="ai-chat-messages" class="ai-chat">
+                                <div class="ai-message bot">
+                                    <div class="ai-avatar">🤖</div>
+                                    <div class="ai-message-content">
+                                        <strong>JIT AI Assistant</strong>
+                                        <p>Hello! I'm here to help you navigate the JIT Alumni platform. You can ask me about:</p>
+                                        <div class="ai-suggestions">
+                                            <button class="ai-suggestion-btn" onclick="askAI('How do I upload documents to Supabase?')">Supabase Upload</button>
+                                            <button class="ai-suggestion-btn" onclick="askAI('What file types are supported?')">File Types</button>
+                                            <button class="ai-suggestion-btn" onclick="askAI('How does RSA encryption work?')">RSA Security</button>
+                                            <button class="ai-suggestion-btn" onclick="askAI('Where can I find my certificates?')">Find Documents</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ai-input-area">
+                                <input type="text" class="form-control" id="ai-chat-input" placeholder="Ask me anything about JIT Alumni platform...">
+                                <button class="btn btn--primary" id="ai-send-message">Ask AI</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Event Modal -->
+    <div id="add-event-modal" class="modal hidden">
+        <div class="modal-backdrop" onclick="closeModal('add-event-modal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🎪 Add New Event</h3>
+                <button class="modal-close" onclick="closeModal('add-event-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-event-form">
+                    <div class="form-group">
+                        <label class="form-label">Event Title</label>
+                        <input type="text" class="form-control" id="event-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="event-description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Date</label>
+                        <input type="date" class="form-control" id="event-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Time</label>
+                        <input type="time" class="form-control" id="event-time" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Venue</label>
+                        <input type="text" class="form-control" id="event-venue" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Capacity</label>
+                        <input type="number" class="form-control" id="event-capacity" min="1" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn--outline" onclick="closeModal('add-event-modal')">Cancel</button>
+                        <button type="submit" class="btn btn--primary">Create Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Job Modal -->
+    <div id="add-job-modal" class="modal hidden">
+        <div class="modal-backdrop" onclick="closeModal('add-job-modal')"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>💼 Post New Job</h3>
+                <button class="modal-close" onclick="closeModal('add-job-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="add-job-form">
+                    <div class="form-group">
+                        <label class="form-label">Job Title</label>
+                        <input type="text" class="form-control" id="job-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Company</label>
+                        <input type="text" class="form-control" id="job-company" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-control" id="job-location" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Salary Range</label>
+                        <input type="text" class="form-control" id="job-salary" placeholder="e.g., ₹3-6 LPA" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" id="job-description" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Requirements</label>
+                        <textarea class="form-control" id="job-requirements" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Application Deadline</label>
+                        <input type="date" class="form-control" id="job-deadline" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn--outline" onclick="closeModal('add-job-modal')">Cancel</button>
+                        <button type="submit" class="btn btn--primary">Post Job</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
