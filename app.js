@@ -6,8 +6,8 @@
  ***********************************/
 
 // Replace with your actual Supabase credentials
-const SUPABASE_URL = 'https://your-project-id.supabase.co';
-const SUPABASE_ANON_KEY = 'your-anon-key';
+const SUPABASE_URL = 'https://efjqzodktbghjqgrzret.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVmanF6b2RrdGJnaGpxZ3J6cmV0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTg1NjQwNTIsImV4cCI6MjA3NDE0MDA1Mn0.9YqgMDe14qhg1JkVEirEHJuHwsoKw7VEyk5R2RYjKic';
 
 // Initialize Supabase client
 let supabase = null;
@@ -273,6 +273,19 @@ const appData = {
       status: "active",
       createdBy: "admin",
       createdAt: "2024-09-18"
+    },
+    {
+      id: "job2",
+      title: "Senior Software Developer",
+      company: "NoviTech Solutions Ltd",
+      location: "Chennai",
+      salary: "₹13-16 LPA",
+      deadline: "2025-10-30",
+      description: "Join our dynamic team as a Senior Software Developer working with modern technologies.",
+      requirements: "M.Tech in Computer Science, Java/Python knowledge, 0-2 years experience",
+      status: "active",
+      createdBy: "admin",
+      createdAt: "2024-09-20"
     }
   ],
   sampleEvents: [
@@ -311,6 +324,19 @@ const appData = {
       capacity: 150,
       registered: 89,
       description: "Professional development workshop covering resume building, interview skills, and career advancement.",
+      status: "active",
+      createdBy: "admin", 
+      createdAt: "2024-09-12"
+    },
+    {
+      id: "event4",
+      title: "Flutter Workshop",
+      date: "2025-10-15", 
+      time: "02:00 PM",
+      venue: "Conference Hall",
+      capacity: 150,
+      registered: 140,
+      description: "Professional development workshop covering App development, importance of flutter and ways to publish it",
       status: "active",
       createdBy: "admin", 
       createdAt: "2024-09-12"
@@ -363,7 +389,16 @@ const appData = {
     "How does RSA encryption work?": "RSA encryption secures your document metadata using 2048-bit keys. Your personal information and file details are encrypted before storage, ensuring data privacy and security.",
     "How do I check document approval status?": "Check your Documents section for real-time status updates. Green = approved, yellow = pending, red = rejected. You'll also receive encrypted notifications.",
     "Where can I find my certificates?": "Approved documents appear in your Documents section with a download button. All files are stored securely in Supabase with encrypted metadata.",
-    "How to contact admin?": "Use the Communication section for secure RSA-encrypted messaging with admin support."
+    "How to contact admin?": "Use the Communication section for secure RSA-encrypted messaging with admin support.",
+    "How to reset my password?": "To reset your password, visit the Account Settings section and follow the prompts to change your credentials. All password resets are protected using RSA encryption and will update instantly in Supabase.",
+    "Can I edit uploaded document details?": "Yes, you can edit metadata such as description or category by clicking the edit icon in the Documents section. The updated details are securely written to Supabase.",
+    "How is my alumni data managed?": "All alumni profiles, documents, and communications are stored securely in Supabase. Access is controlled via authentication and encrypted transactions to protect privacy.",
+    "How do I register for alumni events?": "Go to the Events section and click 'Register' next to your chosen event. The chatbot will confirm your registration and store your status with instant updates in Supabase.",
+    "How do I update my contact information?": "Visit the Profile page and submit any new contact details. Your changes are encrypted and synchronously updated in the alumni database stored on Supabase.",
+    "Who can see my uploaded documents?": "Only you and designated admins can view, review, or download your documents. Permissions are managed in Supabase, and RSA encryption keeps your files private.",
+    "How do I receive updates about alumni news?": "Subscribe in the Notifications section to get real-time updates and announcements from admin, delivered securely through our encrypted communication system.",
+    "How do I give feedback to the alumni team?": "Use the Feedback feature in the portal to send suggestions or concerns. Feedback is transmitted securely and stored in Supabase for review by the alumni administration.",
+    "Can I download my certificate multiple times?": "Yes, approved certificates and documents can be downloaded any number of times as long as your alumni account remains active. The system tracks access for your security."
   },
   messages: [
     {
@@ -1464,7 +1499,7 @@ function registerForEvent(eventId) {
     
     loadAlumniEvents();
     updateAlumniDashboard();
-    alert(`Successfully registered for ${event.title} with RSA-secured data!`);
+    alert(`Successfully registered for ${event.title} `);
   } else {
     alert('Event is full or not found.');
   }
@@ -1663,7 +1698,7 @@ function getAIResponse(question) {
   
   // Enhanced responses for new features
   if (lowerQ.includes('supabase')) {
-    return "Documents are uploaded to Supabase cloud storage with automatic retry mechanism. The system handles up to 3 retry attempts with RSA-encrypted metadata for security.";
+    return "Documents are uploaded to cloud storage";
   }
   
   if (lowerQ.includes('rsa') || lowerQ.includes('encryption') || lowerQ.includes('security')) {
